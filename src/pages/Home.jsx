@@ -60,7 +60,7 @@ function Home({ setCurrentPage }) {
 
                     {/* ĐÃ SỬA: Thay h-full object-cover thành h-auto block để ảnh hiển thị nguyên vẹn, không bị cắt bớt */}
                     <img
-                        src="/src/assets/avatar-tun.jpg"
+                        src="/avatar-tun.jpg"
                         alt="TunVerse"
                         className="w-full h-auto block"
                     />

@@ -1,4 +1,5 @@
 import React from 'react';
+import avatarTun from '../assets/avatar-tun.jpg';
 
 function Home({ setCurrentPage }) {
     return (
@@ -60,7 +61,7 @@ function Home({ setCurrentPage }) {
 
                     {/* ĐÃ SỬA: Thay h-full object-cover thành h-auto block để ảnh hiển thị nguyên vẹn, không bị cắt bớt */}
                     <img
-                        src="/avatar-tun.jpg"
+                        src={avatarTun}
                         alt="TunVerse"
                         className="w-full h-auto block"
                     />

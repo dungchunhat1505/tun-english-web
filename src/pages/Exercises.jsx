@@ -285,7 +285,7 @@ function Exercises() {
                                 ? 'bg-gray-300 text-white cursor-not-allowed'
                                 : 'bg-[#FF85A1] text-white hover:bg-[#ff6b8e] hover:scale-105 active:scale-95'}`}
                     >
-                        Nộp bài & Kiểm tra chặng 🚩
+                        Nộp bài & Kiểm tra 🚩
                     </button>
                     {Object.keys(userAnswers).length < questions.length && (
                         <p className="text-red-400 text-xs mt-3 font-medium">Em cần tích chọn đầy đủ {questions.length} câu để nộp bài nhé!</p>

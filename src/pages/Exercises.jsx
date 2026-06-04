@@ -202,7 +202,7 @@ function Exercises() {
             {/* Bảng thông báo kết quả điểm số */}
             {isSubmitted && (
                 <div className="bg-white border-4 border-[#FFC6FF] p-6 rounded-3xl shadow-xl text-center animate-bounce">
-                    <h3 className="text-2xl font-bold text-[#4A4E69]">Kết quả chặng này:</h3>
+                    <h3 className="text-2xl font-bold text-[#4A4E69]">Kết quả:</h3>
                     <div className="text-5xl font-black text-[#FF85A1] my-2">
                         {score} / {questions.length}
                     </div>

@@ -14,7 +14,7 @@ function Navbar({ currentPage, setCurrentPage }) {
                 <div className="text-2xl font-bold text-[#4A4E69] cursor-pointer hover:scale-105 transition-transform duration-200"
                     onClick={() => setCurrentPage('home')}
                 >
-                    ✨ Anh Giáo <span className="text-[#FF85A1]">Dũng</span>
+                    ✨ <span className="text-[#FF85A1]">TunVerse    </span>
                 </div>
 
                 {/* Các nút Menu */}

@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import vocabData from '../data/vocabulary.json';
 
-const FlashcardItem = ({ item }) => {
+// Chỗ chỉnh sửa 1: Thêm prop "index" vào hàm nhận dữ liệu đầu vào của thẻ
+const FlashcardItem = ({ item, index }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <div className="h-80 w-full perspective-1000 cursor-pointer group" onClick={() => setIsFlipped(!isFlipped)}>
       <div className={`relative w-full h-full transition-transform duration-500 preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
-        
+
         {/* MẶT TRƯỚC */}
         <div className="absolute inset-0 backface-hidden bg-white border-2 border-[#FFC6FF] rounded-2xl shadow-sm flex flex-col items-center justify-center p-6 text-center">
+
+          {/* Chỗ chỉnh sửa 2: Dán đoạn mã hiển thị STT của Tủn vào đây nè! */}
+          {/* Pinned tuyệt đối vào góc top-4 left-4 và sẽ tự động ẩn đi nhờ thuộc tính backface-hidden khi lật thẻ */}
+          <div className="absolute top-4 left-4 bg-[#FFF0F3] text-[#FF85A1] font-black text-xs px-2.5 py-1 rounded-lg border border-[#FFC6FF]">
+            STT: {index + 1}
+          </div>
+
           <span className="text-[#FF85A1] font-bold text-xs uppercase tracking-widest mb-2">Unit {item.unit}</span>
           <h3 className="text-3xl font-black text-[#4A4E69] lowercase">{item.word}</h3>
           <span className="text-sm font-bold text-gray-400 italic mb-2">({item.word_type})</span>
@@ -23,7 +31,7 @@ const FlashcardItem = ({ item }) => {
             <span className="text-xs font-extrabold text-[#FF85A1] uppercase tracking-wider">Nghĩa của từ:</span>
             <p className="text-[#4A4E69] font-black text-xl leading-snug mt-1">{item.meaning}</p>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4 bg-white/50 p-3 rounded-xl border border-[#FFC6FF]/20">
             <div>
               <span className="text-xs font-extrabold text-blue-500 uppercase tracking-wider">Synonym:</span>
@@ -55,12 +63,12 @@ function Flashcards() {
   // Logic lọc dữ liệu: Khối lớp -> Unit -> Nội dung tìm kiếm (Word hoặc Meaning)
   const filteredData = vocabData.filter(item => {
     const matchesFilter = item.grade.toString() === selectedGrade && item.unit.toString() === selectedUnit;
-    const matchesSearch = item.word.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         item.meaning.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.meaning.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
-  const unitTitle = vocabData.find(item => 
+  const unitTitle = vocabData.find(item =>
     item.grade.toString() === selectedGrade && item.unit.toString() === selectedUnit
   )?.context || "";
 
@@ -93,8 +101,8 @@ function Flashcards() {
             </div>
 
             <div className="flex gap-2">
-              <select 
-                value={selectedGrade} 
+              <select
+                value={selectedGrade}
                 onChange={(e) => setSelectedGrade(e.target.value)}
                 className="bg-white border-2 border-[#FFC6FF] rounded-xl px-4 py-2.5 text-sm font-black text-[#4A4E69] focus:outline-none cursor-pointer"
               >
@@ -103,13 +111,13 @@ function Flashcards() {
                 <option value="12">Lớp 12</option>
               </select>
 
-              <select 
-                value={selectedUnit} 
+              <select
+                value={selectedUnit}
                 onChange={(e) => setSelectedUnit(e.target.value)}
                 className="bg-white border-2 border-[#FFC6FF] rounded-xl px-4 py-2.5 text-sm font-black text-[#4A4E69] focus:outline-none cursor-pointer"
               >
                 {[...Array(12)].map((_, i) => (
-                  <option key={i+1} value={i+1}>Unit {i+1}</option>
+                  <option key={i + 1} value={i + 1}>Unit {i + 1}</option>
                 ))}
               </select>
             </div>
@@ -120,13 +128,16 @@ function Flashcards() {
       {/* 2. Hiển thị kết quả */}
       {filteredData.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredData.map((item) => <FlashcardItem key={item.id} item={item} />)}
+          {/* Chỗ chỉnh sửa 3: Thêm tham số "index" vào hàm map và truyền tiếp index={index} xuống component con */}
+          {filteredData.map((item, index) => (
+            <FlashcardItem key={item.id} item={item} index={index} />
+          ))}
         </div>
       ) : (
         <div className="text-center py-24 bg-white rounded-3xl border-2 border-dashed border-[#FFC6FF]">
           <span className="text-4xl">🕵️‍♀️</span>
           <p className="text-gray-400 font-bold mt-3">Không tìm thấy từ "{searchQuery}" trong Unit này.</p>
-          <button 
+          <button
             onClick={() => setSearchQuery('')}
             className="mt-4 text-[#FF85A1] font-black underline decoration-dashed underline-offset-4"
           >

@@ -12,11 +12,38 @@ function Home({ setCurrentPage }) {
                     </span>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#4A4E69] leading-tight">
                         Bứt phá điểm số <br className="hidden sm:inline" />
-                        <span className="text-[#FF85A1]">Tiếng Anh</span> cùng Anh Giáo Dũng
+                        <span className="text-[#FF85A1]">Tiếng Anh</span> cùng TunVerse
                     </h1>
-                    <p className="text-[#4A4E69]/90 font-medium text-base sm:text-lg max-w-xl leading-relaxed">
-                        Hello everybody! Today I feel so good! Trang web này được anh thiết kế riêng để giúp các em học sinh THPT làm chủ từ vựng một cách hệ thống, nhớ lâu qua Flashcards thông minh và cọ xát thực tế với các kho bài tập trắc nghiệm bám sát đề thi. Học là phải mướt 🫵🏻
-                    </p>
+                    {/* Thay thế đoạn thẻ <p> cũ bằng đoạn mã chia dòng và làm nổi bật Slogan này nha Tủn */}
+                    <div className="text-[#4A4E69]/90 font-medium text-base sm:text-lg max-w-xl leading-relaxed space-y-4 text-left">
+
+                        {/* Dòng 1: Lời chào thân thiện */}
+                        <p className="font-bold text-[#4A4E69] text-lg sm:text-xl">
+                            Hello cả nhà iu của TunVerse! 🧑🏻‍🏫
+                        </p>
+
+                        {/* Dòng 2: Đặt vấn đề đánh trúng tâm lý học sinh */}
+                        <p>
+                            Đau đầu vì núi từ vựng học trước quên sau? 💆🏻 Lại không biết hệ thống hóa với ôn tập kiểu gì cho hiệu quả? 🫩
+                        </p>
+
+                        {/* Dòng 3: Khẳng định giải pháp */}
+                        <p className="font-extrabold text-[#4A4E69]">
+                            <span className="text-[#FF85A1]">TunVerse</span> chính xác là những gì tụi em cần 🤯
+                        </p>
+
+                        {/* Dòng 4: Giải thích tính năng cốt lõi */}
+                        <p className="text-sm sm:text-base opacity-90">
+                            Với hệ thống Flashcards thông minh giúp ghi nhớ dễ dàng hơn và kho trắc nghiệm để ôn tập những từ vựng đã học, TunVerse sẽ giúp tụi em làm chủ từ vựng một cách hiệu quả. 🧠
+                        </p>
+
+                        {/* Dòng cuối cùng: Slogan Highlight độc quyền nâng tầm Thương hiệu cá nhân */}
+                        <div className="inline-flex items-center gap-2 bg-[#FFF0F3] border-2 border-[#FFC6FF] text-[#FF85A1] font-black text-base sm:text-lg px-5 py-2.5 rounded-2xl shadow-sm transform hover:scale-105 transition-all duration-200 cursor-default mt-2 select-none">
+                            <span>✨</span>
+                            <span>TunVerse: Chạm là nhớ, lướt là mướt! 🫵🏻</span>
+                        </div>
+
+                    </div>
                     <div className="pt-2">
                         <button
                             onClick={() => setCurrentPage('flashcards')}
@@ -28,9 +55,17 @@ function Home({ setCurrentPage }) {
                 </div>
 
                 {/* Khung ảnh chân dung bên phải */}
-                <div className="flex-shrink-0 w-48 h-48 sm:w-64 sm:h-64 rounded-2xl overflow-hidden border-4 border-white shadow-xl relative bg-white flex items-center justify-center group">
-                    {/* Tủn có thể thay ảnh của mình vào thẻ img dưới đây (bỏ ảnh vào src/assets/) */}
-                    <img src="/src/assets/avatar-tun.jpg" alt="Anh Giáo Dũng" className="w-full h-full object-cover"/>
+                {/* ĐÃ SỬA: Thay h-48 và sm:h-64 thành h-auto để khung tự thích ứng theo chiều cao của ảnh */}
+                <div className="flex-shrink-0 w-48 h-auto sm:w-64 rounded-2xl overflow-hidden border-4 border-white shadow-xl relative bg-white flex items-center justify-center group">
+
+                    {/* ĐÃ SỬA: Thay h-full object-cover thành h-auto block để ảnh hiển thị nguyên vẹn, không bị cắt bớt */}
+                    <img
+                        src="/src/assets/avatar-tun.jpg"
+                        alt="TunVerse"
+                        className="w-full h-auto block"
+                    />
+
+                    {/* Lớp phủ màu hồng pastel vẫn tự động ôm khít theo kích thước ảnh mới nhờ inset-0 */}
                     <div className="absolute inset-0 bg-[#FFC6FF]/20 group-hover:bg-transparent transition-colors duration-300"></div>
                 </div>
             </section>

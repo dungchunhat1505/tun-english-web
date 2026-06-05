@@ -20,28 +20,28 @@ function Home({ setCurrentPage }) {
 
                         {/* Dòng 1: Lời chào thân thiện */}
                         <p className="font-bold text-[#4A4E69] text-lg sm:text-xl">
-                            Hello cả nhà iu của TunVerse! 🧑🏻‍🏫
+                            Hello cả nhà iu của TunVerse!
                         </p>
 
                         {/* Dòng 2: Đặt vấn đề đánh trúng tâm lý học sinh */}
                         <p>
-                            Đau đầu vì núi từ vựng học trước quên sau? 💆🏻 Lại không biết hệ thống hóa với ôn tập kiểu gì cho hiệu quả? 🫩
+                            Đau đầu vì núi từ vựng học trước quên sau? Lại không biết hệ thống hóa với ôn tập kiểu gì cho hiệu quả?
                         </p>
 
                         {/* Dòng 3: Khẳng định giải pháp */}
                         <p className="font-extrabold text-[#4A4E69]">
-                            <span className="text-[#FF85A1]">TunVerse</span> chính xác là những gì tụi em cần 🤯
+                            <span className="text-[#FF85A1]">TunVerse</span> chính xác là những gì tụi em cần!
                         </p>
 
                         {/* Dòng 4: Giải thích tính năng cốt lõi */}
                         <p className="text-sm sm:text-base opacity-90">
-                            Với hệ thống Flashcards thông minh giúp ghi nhớ dễ dàng hơn và kho trắc nghiệm để ôn tập những từ vựng đã học, TunVerse sẽ giúp tụi em làm chủ từ vựng một cách hiệu quả. 🧠
+                            Với hệ thống Flashcards thông minh giúp ghi nhớ dễ dàng hơn và kho trắc nghiệm để ôn tập những từ vựng đã học, TunVerse sẽ giúp tụi em làm chủ từ vựng một cách hiệu quả.
                         </p>
 
                         {/* Dòng cuối cùng: Slogan Highlight độc quyền nâng tầm Thương hiệu cá nhân */}
                         <div className="inline-flex items-center gap-2 bg-[#FFF0F3] border-2 border-[#FFC6FF] text-[#FF85A1] font-black text-base sm:text-lg px-5 py-2.5 rounded-2xl shadow-sm transform hover:scale-105 transition-all duration-200 cursor-default mt-2 select-none">
                             <span>✨</span>
-                            <span>TunVerse: Chạm là nhớ, lướt là mướt! 🫵🏻</span>
+                            <span>TunVerse: Chạm là nhớ, lướt là mướt!</span>
                         </div>
 
                     </div>

@@ -20,7 +20,7 @@ const FlashcardItem = ({ item, index, isLearned, onToggleLearned }) => {
   }, [item.id]);
 
   return (
-    <div className="h-85 w-full perspective-1000 cursor-pointer group select-none" onClick={() => setIsFlipped(!isFlipped)}>
+    <div className="h-[360px] w-full perspective-1000 cursor-pointer group select-none" onClick={() => setIsFlipped(!isFlipped)}>
       <div className={`relative w-full h-full transition-transform duration-500 preserve-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
 
         {/* MẶT TRƯỚC */}
@@ -63,42 +63,45 @@ const FlashcardItem = ({ item, index, isLearned, onToggleLearned }) => {
         </div>
 
         {/* MẶT SAU (Giao diện dòng kẻ nháp sổ tay học sinh) */}
-        <div className="absolute inset-0 backface-hidden bg-[#FFF8FA] border-3 border-[#4A4E69] rounded-3xl shadow-[5px_5px_0px_0px_#FF85A1] flex flex-col p-6 rotate-y-180 overflow-y-auto space-y-4 transition-all duration-200 group-hover:shadow-[7px_7px_0px_0px_#FF85A1] group-hover:-translate-y-0.5">
-          <div className="flex justify-between items-start border-b-2 border-dashed border-[#FFC6FF]/40 pb-2">
-            <div>
-              <span className="text-[10px] font-black text-[#FF85A1] uppercase tracking-wider bg-[#FFF0F3] px-2 py-0.5 rounded border border-[#FFC6FF]">Nghĩa của từ:</span>
-              <p className="text-[#4A4E69] font-black text-lg leading-snug mt-1.5">{item.meaning}</p>
+        <div className="absolute inset-0 backface-hidden bg-[#FFF8FA] border-3 border-[#4A4E69] rounded-3xl shadow-[5px_5px_0px_0px_#FF85A1] flex flex-col rotate-y-180 transition-all duration-200 group-hover:shadow-[7px_7px_0px_0px_#FF85A1] group-hover:-translate-y-0.5">
+          {/* Vùng nội dung cuộn bên trong */}
+          <div className="flex-grow overflow-y-auto pt-3 px-4 pb-14 space-y-2.5">
+            <div className="flex justify-between items-start border-b-2 border-dashed border-[#FFC6FF]/40 pb-1.5">
+              <div>
+                <span className="text-[10px] font-black text-[#FF85A1] uppercase tracking-wider bg-[#FFF0F3] px-2 py-0.5 rounded border border-[#FFC6FF]">Nghĩa của từ:</span>
+                <p className="text-[#4A4E69] font-black text-lg leading-snug mt-1">{item.meaning}</p>
+              </div>
+              <button
+                onClick={(e) => speakText(item.word, e)}
+                className="p-2 bg-white hover:bg-[#FFC6FF] rounded-full border-2 border-[#4A4E69] transition-all text-xs shadow-[1.5px_1.5px_0px_0px_#4A4E69] hover:scale-110 active:scale-95 cursor-pointer"
+                title="Nghe phát âm 🔊"
+              >
+                🔊
+              </button>
             </div>
-            <button
-              onClick={(e) => speakText(item.word, e)}
-              className="p-2 bg-white hover:bg-[#FFC6FF] rounded-full border-2 border-[#4A4E69] transition-all text-xs shadow-[1.5px_1.5px_0px_0px_#4A4E69] hover:scale-110 active:scale-95 cursor-pointer"
-              title="Nghe phát âm 🔊"
-            >
-              🔊
-            </button>
+
+            <div className="bg-white/80 py-2 px-3 rounded-2xl border-2 border-[#4A4E69] shadow-[2px_2px_0px_0px_#FFC6FF] space-y-1">
+              <div className="flex flex-wrap items-baseline gap-1.5">
+                <span className="text-xs sm:text-sm font-black text-blue-500 uppercase tracking-wider">Synonym:</span>
+                <span className="text-sm sm:text-base text-gray-700 font-bold lowercase">{item.synonym || 'none'}</span>
+              </div>
+              <div className="flex flex-wrap items-baseline gap-1.5">
+                <span className="text-xs sm:text-sm font-black text-orange-500 uppercase tracking-wider">Antonym:</span>
+                <span className="text-sm sm:text-base text-gray-700 font-bold lowercase">{item.antonym || 'none'}</span>
+              </div>
+            </div>
+
+            {/* Dạng ô note đính kẹp kim loại kute */}
+            <div className="bg-white py-2 px-3 rounded-2xl border-3 border-[#4A4E69] shadow-[3px_3px_0px_0px_#FFC6FF] relative">
+              <span className="text-xs sm:text-sm font-black text-[#4A4E69] uppercase tracking-wider block border-b border-gray-100 pb-1">Example:</span>
+              <p className="text-base sm:text-lg text-[#4A4E69] font-semibold italic mt-1 leading-relaxed">
+                "{item.example}"
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 bg-white/80 p-3 rounded-2xl border-2 border-[#4A4E69] shadow-[2px_2px_0px_0px_#FFC6FF]">
-            <div>
-              <span className="text-[10px] font-black text-blue-500 uppercase tracking-wider block">Synonym:</span>
-              <p className="text-xs text-gray-700 font-bold mt-1 lowercase truncate">{item.synonym || 'none'}</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-black text-orange-500 uppercase tracking-wider block">Antonym:</span>
-              <p className="text-xs text-gray-700 font-bold mt-1 lowercase truncate">{item.antonym || 'none'}</p>
-            </div>
-          </div>
-
-          {/* Dạng ô note đính kẹp kim loại kute */}
-          <div className="bg-white p-4 rounded-2xl border-3 border-[#4A4E69] shadow-[3px_3px_0px_0px_#FFC6FF] relative overflow-hidden">
-            <span className="text-[10px] font-black text-[#4A4E69] uppercase tracking-wider block border-b border-gray-100 pb-1">Example:</span>
-            <p className="text-xs sm:text-sm text-[#4A4E69] font-semibold italic mt-2 leading-relaxed">
-              "{item.example}"
-            </p>
-          </div>
-
-          {/* Nút Đã học ở đáy thẻ mặt sau */}
-          <div className="flex justify-center pt-2 mt-auto" onClick={(e) => e.stopPropagation()}>
+          {/* Nút Đã học ở đáy thẻ mặt sau (Cố định ở dưới, không cuộn) */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => onToggleLearned(item.id)}
               className={`px-4 py-1.5 rounded-2xl border-3 border-[#4A4E69] text-xs font-black transition-all cursor-pointer flex items-center gap-1.5 ${

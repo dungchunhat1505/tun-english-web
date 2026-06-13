@@ -18,12 +18,6 @@ function App() {
         return <Flashcards />;
       case 'exercises':
         return <Exercises />;
-        return (
-          <div className="text-center py-20 bg-white rounded-2xl border-2 border-dashed border-[#FFC6FF]">
-            <h2 className="text-2xl font-bold text-[#4A4E69]">📝 Trang Làm Bài Tập đang được xây dựng...</h2>
-            <p className="text-gray-500 mt-2">Hẹn gặp các bạn ở Giai đoạn 4 nhé!</p>
-          </div>
-        );
       default:
         return <Home setCurrentPage={setCurrentPage} />;
     }

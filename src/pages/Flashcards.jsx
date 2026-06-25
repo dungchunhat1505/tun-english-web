@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import vocabData from '../data/vocabulary.json';
+import ExampleTranslation from '../components/ExampleTranslation';
 
 // Helper phát âm từ vựng bằng giọng đọc người thật UK chuẩn (Youdao Dictionary API)
 const speakText = (text, e) => {
@@ -97,6 +98,7 @@ const FlashcardItem = ({ item, index, isLearned, onToggleLearned }) => {
               <p className="text-base sm:text-lg text-[#4A4E69] font-semibold italic mt-1 leading-relaxed">
                 "{item.example}"
               </p>
+              {item.example && <ExampleTranslation text={item.example} />}
             </div>
           </div>
 

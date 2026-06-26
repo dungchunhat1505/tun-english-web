@@ -129,7 +129,6 @@ function Flashcards() {
   // Các state quản lý chế độ xem và bộ lọc
   const [viewMode, setViewMode] = useState('grid'); // 'grid' hoặc 'slide'
   const [statusFilter, setStatusFilter] = useState('all'); // 'all', 'learned', 'unlearned'
-  const [searchAllLibrary, setSearchAllLibrary] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [shuffledList, setShuffledList] = useState(null);
 
@@ -156,11 +155,11 @@ function Flashcards() {
   useEffect(() => {
     setShuffledList(null);
     setActiveSlideIndex(0);
-  }, [selectedGrade, selectedUnit, searchQuery, statusFilter, searchAllLibrary]);
+  }, [selectedGrade, selectedUnit, searchQuery, statusFilter]);
 
   // 1. Bộ lọc cơ bản theo Grade, Unit và Tìm kiếm từ khóa
   const baseFiltered = vocabData.filter(item => {
-    const matchesFilter = searchAllLibrary || (item.grade.toString() === selectedGrade && item.unit.toString() === selectedUnit);
+    const matchesFilter = item.grade.toString() === selectedGrade && item.unit.toString() === selectedUnit;
     const matchesSearch = item.word.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.meaning.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
@@ -196,14 +195,9 @@ function Flashcards() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 text-left">
             <h2 className="text-3xl font-black text-[#4A4E69] tracking-tight">Thư Viện Từ Vựng 📚</h2>
-            {!searchAllLibrary && unitTitle && (
+            {unitTitle && (
               <div className="inline-flex items-center gap-2 text-[#FF85A1] font-black text-xs bg-[#FFF0F3] px-3.5 py-1.5 rounded-2xl border-2 border-[#4A4E69] shadow-[1.5px_1.5px_0px_0px_#4A4E69]">
                 <span>🌱 Chủ đề: <span className="capitalize">{unitTitle}</span></span>
-              </div>
-            )}
-            {searchAllLibrary && (
-              <div className="inline-flex items-center gap-2 text-blue-600 font-black text-xs bg-blue-50 px-3.5 py-1.5 rounded-2xl border-2 border-blue-200 shadow-[1.5px_1.5px_0px_0px_#BDE0FE]">
-                <span>🌍 Chế độ: Tìm kiếm trên toàn thư viện</span>
               </div>
             )}
           </div>
@@ -225,7 +219,6 @@ function Flashcards() {
             <div className="flex gap-2">
               <select
                 value={selectedGrade}
-                disabled={searchAllLibrary}
                 onChange={(e) => setSelectedGrade(e.target.value)}
                 className="bg-white border-3 border-[#4A4E69] rounded-2xl px-4 py-3 text-xs font-black text-[#4A4E69] focus:outline-none cursor-pointer disabled:opacity-40 shadow-[2px_2px_0px_0px_#4A4E69] active:translate-y-0.5 active:shadow-none"
               >
@@ -236,7 +229,6 @@ function Flashcards() {
 
               <select
                 value={selectedUnit}
-                disabled={searchAllLibrary}
                 onChange={(e) => setSelectedUnit(e.target.value)}
                 className="bg-white border-3 border-[#4A4E69] rounded-2xl px-4 py-3 text-xs font-black text-[#4A4E69] focus:outline-none cursor-pointer disabled:opacity-40 shadow-[2px_2px_0px_0px_#4A4E69] active:translate-y-0.5 active:shadow-none"
               >
@@ -276,17 +268,6 @@ function Flashcards() {
                 </button>
               </div>
             </div>
-
-            {/* Checkbox Tìm kiếm toàn thư viện */}
-            <label className="inline-flex items-center gap-2.5 cursor-pointer border-3 border-[#4A4E69] bg-white rounded-2xl px-3.5 py-1.5 hover:bg-gray-50 active:translate-y-0.5 active:shadow-none transition-all shadow-[2px_2px_0px_0px_#4A4E69]">
-              <input
-                type="checkbox"
-                checked={searchAllLibrary}
-                onChange={(e) => setSearchAllLibrary(e.target.checked)}
-                className="accent-[#FF85A1] h-4 w-4 cursor-pointer"
-              />
-              <span className="text-xs font-black text-[#4A4E69]">Tìm kiếm toàn bộ thư viện 🌍</span>
-            </label>
           </div>
 
           {/* Toggle Chế độ xem Grid / Slide */}
@@ -396,7 +377,6 @@ function Flashcards() {
             onClick={() => {
               setSearchQuery('');
               setStatusFilter('all');
-              setSearchAllLibrary(false);
             }}
             className="mt-4 px-4 py-2 bg-white border-3 border-[#4A4E69] rounded-2xl text-[#FF85A1] font-black text-xs shadow-[2.5px_2.5px_0px_0px_#4A4E69] active:translate-y-0.5 active:shadow-none transition-all cursor-pointer"
           >
